@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    for (let i=0; i<5; i++){
+        console.log(i);
+    }
+    //console.log("我在循环外：" + i);
+
+    function fun1(a, b = 1){
+        // b = b || 1;
+        console.log(a/b);
+    }
+
+    fun1(10, 2);
+
+    let fun2 = a => {
+        a = 1000;
+        console.log(a);
+    }
+
+    fun2(100)
+
+    let person = {
+        name: "liuyan",
+        eat: function(food){
+            console.log(this.name + "吃了" + food);
+        },
+        eat1: food => console.log(person.name + "吃了" + food),
+        eat2(food){
+            console.log(this.name + "吃了" + food)
+        }
+    }
+    person.eat("香蕉")
+    person.eat1("苹果")
+    person.eat2("鸡蛋")
+
+    let p = {
+        name: "lixaolu",
+        age: 20
+    }
+    let fun3 = ({name}) => console.log(name);
+
+    fun3(p);
+
+</script>
+</html>

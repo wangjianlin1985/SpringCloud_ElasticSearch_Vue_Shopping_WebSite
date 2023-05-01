@@ -1,0 +1,18 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    url: jdbc:mysql:///mybatis
+    username: root
+    password: root
+  application:
+    name: service-provider
+mybatis:
+  type-aliases-package: cn.itcast.service.pojo
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka
+  instance:
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 15

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <hello1 ></hello1>
+    </div>
+</body>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    const hello = {
+        template: `
+            <div>
+                <h1>打个招呼：{{num}}</h1>
+                <input type="button" value="点我加一" @click="incr">
+            </div>
+        `,
+        data(){
+            return {
+                num: 0
+            }
+        },
+        methods: {
+            incr(){
+                this.num++;
+            }
+        }
+    }
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+
+        },
+        components: {
+            hello1: hello
+        }
+    })
+</script>
+</html>

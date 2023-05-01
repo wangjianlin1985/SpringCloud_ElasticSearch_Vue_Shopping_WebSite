@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <counter :numx="num" @incr1="incr"></counter>
+    </div>
+</body>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    Vue.component("counter", {
+        template: `
+            <button @click="subIncr">点我呀，点我加1. {{numx}}</button>
+        `,
+        props: {
+            numx: {
+                type: Number,
+                required: true
+            }
+        },
+        methods: {
+            subIncr(){
+                this.$emit("incr1");
+            }
+        }
+    })
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            num: 0
+        },
+        methods: {
+            incr(){
+                this.num++;
+            }
+        }
+    })
+</script>
+</html>

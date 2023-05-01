@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <counter :numx="num" :title="11"></counter>
+        <!--<counter></counter>
+        <counter></counter>-->
+    </div>
+</body>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    Vue.component("counter", {
+        template: `
+            <button @click="numx++">点我呀，点我加1. {{numx}}</button>
+        `,
+        props: {
+            numx: {
+                type: Number,
+                required: true
+            },
+            title: {
+                type: Number
+            }
+        }
+    })
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            num: 0
+        }
+    })
+</script>
+</html>

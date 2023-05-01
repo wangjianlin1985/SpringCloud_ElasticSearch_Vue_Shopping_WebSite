@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <!--vue实例的html模板-->
+    <div id="app">
+        <input type="text" v-model="message">
+        <hr />
+        <div>
+            {{birth1}}
+        </div>
+
+        <hr />
+        <input type="text" v-model="stock">
+        <div :class="{active: stock > 0}" class="static static1" title="stock">加入购物车</div>
+
+        <hr />
+        <input type="button" value="点我呀，点我生成随机数" @click="random=Math.random()">{{random}}<br/>
+        <span v-if="random>0.75">大于0.75</span>
+        <span v-else-if="random>0.5">大于0.5</span>
+        <span v-else-if="random>0.25">大于0.25</span>
+        <span v-else>大于0</span>
+        <hr />
+        <input type="button" value="点我呀，点我变化" @click="show=!show">
+        <div v-if="show">您看到我了，v-if</div>
+        <div v-show="show">您看到我了，v-show</div>
+        <hr />
+        <ul>
+            <li v-for="(val,key,index) in user">{{index + 1}}.{{key}}-{{val}}</li>
+        </ul>
+        <ul>
+            <li v-if="user.gender == '女'" v-for="(user,index) in users" :key="index">{{index + 1}}.{{user.name}}-{{user.gender}}-{{user.age}}</li>
+        </ul>
+        <hr />
+        <input type="text" value="按我呀，点我打印" @keyup.alt.67="print">
+        <hr />
+        <input type="button" value="点我呀，点我打印" @contextMenu.prevent="print">
+        <hr />
+        <input type="checkbox" v-model="language" value="java">java<br>
+        <input type="checkbox" v-model="language" value="ios">ios<br>
+        <input type="checkbox" v-model="language" value="php">php<br>
+        您选择了：{{language.join(",")}}
+        <hr />
+        <input type="text" v-model="num">
+        <input type="button" value="点我呀，点我加1" @click="incr()">
+        <!-- 声明式渲染，单向渲染 -->
+        <h1>大家好，我是<span v-text="name">张学友</span>。有{{num}}妹子迷恋我</h1>
+    </div>
+</body>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    // 初始化一个vue实例
+    let app = new Vue({
+        el: "#app", // el：选择器，vue实例对应html模板
+        data: { // 数据模型
+            name: "pigOne",
+            num: 100,
+            language: [],
+            users:[
+                {name:'柳岩', gender:'女', age: 21},
+                {name:'峰哥', gender:'男', age: 18},
+                {name:'范冰冰', gender:'女', age: 24},
+                {name:'刘亦菲', gender:'女', age: 18},
+                {name:'古力娜扎', gender:'女', age: 25}
+            ],
+            user: {name:'柳岩', gender:'女', age: 21},
+            show: true,
+            random: 0,
+            stock: 0,
+            birthday:1429032123201, // 毫秒值
+            message: ""
+        },
+        created(){
+            this.num = 10000;
+        },
+        watch: {
+            message(newVal, oldVal){
+
+                console.log(newVal, oldVal);
+            }
+        },
+        computed: { // 定义很多方法，这里的所有方法必须有返回值。可以像数据模型一样使用。他会基于依赖的数据模型进行缓存
+            birth1(){
+                const date = new Date(this.birthday);
+                return date.getFullYear() + "年" + date.getMonth() + "月" + date.getDay() + "日";
+            }
+        },
+        methods: { // 定义方法
+            incr(){
+                console.log(this);
+                this.num++;
+            },
+            print(){
+                // ev.preventDefault(); // 禁用默认事件
+                console.log("您点击了右键！");
+            },
+            birth(){
+                const date = new Date(this.birthday);
+                return date.getFullYear() + "年" + date.getMonth() + "月" + date.getDay() + "日";
+            }
+        }
+    })
+</script>
+</html>
